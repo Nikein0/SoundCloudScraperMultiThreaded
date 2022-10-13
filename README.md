@@ -1,3 +1,3 @@
 # SoundCloudScraper
 
-a song downloader specifically for soundlcoud.com
+a song downloader specifically for soundcloud.com
