@@ -2,13 +2,14 @@
 using System.IO;
 using System.Diagnostics;
 using SoundCloudExplode;
+using Guna.UI2.WinForms;
+using System.Threading.Tasks;
 
 namespace SoundCloudScraper
 {
     class SoundCloud
     {
         public SoundCloudClient soundcloud = new SoundCloudClient();
-
     }
     class Downloader : SoundCloud
     {
@@ -28,13 +29,18 @@ namespace SoundCloudScraper
     }
     class SongInfo : SoundCloud
     {
-        public async void GetName(string SClink)
+        public string GetName(string SClink)
         {
-            var track = await soundcloud.Tracks.GetAsync(SClink);
+            var track = soundcloud.Tracks.GetAsync(SClink).Result;
             string trackname = track.Title;
             string creatorname = track.User.Username;
-            Console.WriteLine($@"{trackname} - {creatorname}");
+            string fullname = $@"{trackname} - {creatorname}";
+
+            return fullname;
         }
+
+        
+
         public async void GetDuration(string SClink)
         {
             var track = await soundcloud.Tracks.GetAsync(SClink);
