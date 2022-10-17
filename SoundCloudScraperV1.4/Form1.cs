@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 using SoundCloudExplode;
 using SoundCloudScraper;
 
@@ -13,9 +14,6 @@ namespace SoundCloudScraperV1._4
 {
     public partial class Form1 : Form
     {
-        private long totalbytes = 0;
-        private long collectedbytes = 0;
-        private static string songlink = "https://soundcloud.com/";
         public SoundCloudClient soundcloud = new SoundCloudClient();
         public Form1()
         {
@@ -30,11 +28,15 @@ namespace SoundCloudScraperV1._4
         private async void guna2Button1_Click(object sender, EventArgs e)
         {
             SongInfo songinfo = new SongInfo();
+            var stopwatch = new Stopwatch();
             var track = await soundcloud.Tracks.GetAsync(TxtURL.Text);
-            string trackname = track.Title;
-            string creatorname = track.User.Username;
-            string fullname = $@"{trackname} - {creatorname}";
-            guna2TextBox2.Text = fullname;
+            guna2TextBox2.Text = $@"{songinfo.GetName(track.Title, track.User.Username)}   {songinfo.GetDuration(track.Duration)}   ";
+            stopwatch.Start();
+            await soundcloud.DownloadAsync(track, Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + $@"\Downloads\{track.User.Username} - {track.Title}.mp3");
+            stopwatch.Stop();
+            TimeSpan timespan = stopwatch.Elapsed;
+            guna2TextBox2.Text += $@"{timespan.Minutes}:{timespan.Seconds}:{timespan.Milliseconds}";
+
 
         }
 
@@ -51,6 +53,11 @@ namespace SoundCloudScraperV1._4
         private void bgWorkerGetSong_DoWork(object sender, DoWorkEventArgs e)
         {
                 
+        }
+
+        private async void guna2ProgressBar1_ValueChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

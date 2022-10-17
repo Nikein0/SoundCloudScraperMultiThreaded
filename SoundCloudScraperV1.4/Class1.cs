@@ -29,36 +29,31 @@ namespace SoundCloudScraper
     }
     class SongInfo : SoundCloud
     {
-        public string GetName(string SClink)
+        public string GetName(string songname, string username)
         {
-            var track = soundcloud.Tracks.GetAsync(SClink).Result;
-            string trackname = track.Title;
-            string creatorname = track.User.Username;
-            string fullname = $@"{trackname} - {creatorname}";
-
+            string fullname = $@"{username} - {songname}";
             return fullname;
         }
 
         
 
-        public async void GetDuration(string SClink)
+        public string GetDuration(long? length)
         {
-            var track = await soundcloud.Tracks.GetAsync(SClink);
-            long? durationms = track.Duration;
-            long? seconds = durationms /1000;
+            long? seconds = length /1000;
             long? minutes = seconds /60;
             long? hours = minutes /60;
             seconds = seconds % 60;
             minutes = minutes % 60;
             if (hours <= 0)
             {
-                Console.WriteLine($@"{minutes}:{seconds}");
+                string full = $@"{minutes}:{seconds}";
+                return full;
             }
             else
             {
-                Console.WriteLine($@"{hours}:{minutes}:{seconds}");
+                string full = $@"{hours}:{minutes}:{seconds}";
+                return full;
             }
-            Console.WriteLine();
         }
     
     }
