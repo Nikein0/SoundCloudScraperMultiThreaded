@@ -31,9 +31,7 @@ namespace SoundCloudScraperV1._4
             var stopwatch = new Stopwatch();
             var track = await soundcloud.Tracks.GetAsync(TxtURL.Text);
             guna2TextBox2.Text = $@"{songinfo.GetName(track.Title, track.User.Username)}   {songinfo.GetDuration(track.Duration)}   ";
-            stopwatch.Start();
-            await soundcloud.DownloadAsync(track, Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + $@"\Downloads\{track.User.Username} - {track.Title}.mp3");
-            stopwatch.Stop();
+            
             TimeSpan timespan = stopwatch.Elapsed;
             guna2TextBox2.Text += $@"{timespan.Minutes}:{timespan.Seconds}:{timespan.Milliseconds}";
 
