@@ -13,6 +13,7 @@ using Guna.UI2.WinForms;
 using System.Xml.Serialization;
 using System.Xml;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace SoundCloudScraperV1._4
 {
@@ -46,7 +47,7 @@ namespace SoundCloudScraperV1._4
             {
 
                 var track = await soundcloud.Tracks.GetAsync(TxtURL.Text);
-                Song song = new Song(track.Title, track.User.Username, track.Duration);
+                Song song = new Song(track.Title, track.User.Username, track.Duration);    
                 pictureBox1.Load(track.ArtworkUrl.ToString());
                 Downloader downloader = new Downloader();
 
@@ -122,12 +123,20 @@ namespace SoundCloudScraperV1._4
             songStack.addSongCount();
         }
 
-        private async void DownloadAll_Button_Click(object sender, EventArgs e)
+        private void DownloadAll_Button_Click(object sender, EventArgs e)
         {
-            
-                for (int i = 0; i < songStack.getSongCount(); i++)
+            guna2TextBox2.Text = " ";
+            Task[] downloadTasks = new Task[songStack.getSongCount()];
+
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+
+
+            //for (int i = 0; i < songStack.getSongCount(); i++)
+            Parallel.For(0, songStack.getSongCount(), async i =>
                 {
-                guna2TextBox2.Text = "";
+                    //guna2TextBox2.Text = "";
                     var track = await soundcloud.Tracks.GetAsync(songStack.getLink(i));
                     Song song = new Song(track.Title, track.User.Username, track.Duration);
                     pictureBox1.Load(track.ArtworkUrl.ToString());
@@ -135,18 +144,23 @@ namespace SoundCloudScraperV1._4
 
                     Downloader downloader = new Downloader();
 
-                    guna2TextBox2.Visible = true;
-                    guna2TextBox2.Text = $@"{song.getSpecName()}";
+                    //guna2TextBox2.Visible = true;
+                    //guna2TextBox2.Text = $@"{song.getSpecName()}";
                     await downloader.Download(songStack.getLink(i));
                     guna2ProgressBar1.Increment(100);
                     TimeSpan timespan = downloader.GetTimespan();
-                    guna2TextBox2.Text += " ";
-                    guna2TextBox2.Text += $@"{timespan.Minutes}:{timespan.Seconds}:{timespan.TotalMilliseconds}";
-                    guna2TextBox2.Text += "\r\n Download complete";
-                    guna2ProgressBar1.Decrement(100);
+                    //guna2TextBox2.Text += " ";
+                    //guna2TextBox2.Text += $@"{timespan.Minutes}:{timespan.Seconds}:{timespan.TotalMilliseconds}";
+                    //guna2TextBox2.Text += "\r\n Download complete";
+                    //guna2ProgressBar1.Decrement(100);
 
-                }
-           
+                });
+            stopwatch.Stop();
+            guna2TextBox2.Text += " ";
+            guna2TextBox2.Text += $@"{stopwatch.Elapsed.Minutes}:{stopwatch.Elapsed.Seconds}:{stopwatch.Elapsed.TotalMilliseconds}";
+            guna2TextBox2.Text += $@" Downloaded {songStack.getSongCount()} songs";
+            guna2ProgressBar1.Decrement(100);
+
         }
     }
 }

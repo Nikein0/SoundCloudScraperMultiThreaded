@@ -16,13 +16,14 @@ using System.Reflection;
 namespace SoundCloudScraper
 {
 
-    class SoundCloud
+    public class SoundCloud
     {
         public SoundCloudClient soundcloud = new SoundCloudClient();
         public virtual string getSpecName() { return null; } //dinaminis polimorfizmas
     }
-    class Downloader : SoundCloud
+    public class Downloader : SoundCloud
     {
+        public bool isDownloadable = true;
         public TimeSpan timespan;
         private string specname = "";
         private int downloadcount = 0;
@@ -36,7 +37,7 @@ namespace SoundCloudScraper
 
         public void UpdateDwnlCount() { this.downloadcount = downloadcount + 1; }
 
-        public async Task Download(string SClink)   //@$"c:\Downloads\{trackname}.mp3"
+        /*public async Task Download(string SClink)   //@$"c:\Downloads\{trackname}.mp3"
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -47,6 +48,22 @@ namespace SoundCloudScraper
             stopwatch.Stop();
             
             SetTimespan(stopwatch.Elapsed);
+        }*/
+        public async Task Download(string SClink)
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            var track = await soundcloud.Tracks.GetAsync(SClink);
+
+            UpdateDwnlCount();
+            SetSpecName(track.Title);
+
+            await Task.Run(() => soundcloud.DownloadAsync(track, Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + $@"\Downloads\{track.User.Username} - {track.Title}.mp3"));
+
+            stopwatch.Stop();
+            SetTimespan(stopwatch.Elapsed);
+
         }
         public TimeSpan GetTimespan()
         {
