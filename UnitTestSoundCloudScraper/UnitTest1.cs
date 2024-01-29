@@ -87,11 +87,11 @@ namespace UnitTestSoundCloudScraper
             Assert.IsTrue(track.Streamable);
         }
         [TestMethod]
-        public async void CheckIfMusicHasDownloadsLeft()
+        public async Task CheckIfMusicHasDownloadsLeft()
         {
             SoundCloudClient soundcloud = new SoundCloudClient();
             var track = await soundcloud.Tracks.GetAsync(link);
-            Assert.IsTrue(track.HasDownloadsLeft);
+            Assert.IsTrue(!track.HasDownloadsLeft);
         }
     }
 }

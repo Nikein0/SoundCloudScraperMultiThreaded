@@ -14,6 +14,10 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.IO;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using System.Security.Cryptography;
+using System.Runtime.Remoting.Contexts;
+using MySqlX.XDevAPI.Relational;
 
 namespace SoundCloudScraperV1._4
 {
@@ -24,10 +28,18 @@ namespace SoundCloudScraperV1._4
         private SoundCloudClient soundcloud = new SoundCloudClient();
         private string linktext = "https://soundcloud.com/";
         SongStack songStack = new SongStack();
+        private MySqlConnection GetCon()
+        {
+            string constr = "SERVER=localhost;DATABASE=soundcloudscraper;UID=root;PASSWORD=;";
+            MySqlConnection con = new MySqlConnection(constr);
+            con.Open();
 
+            return con;
+        }
         public Form1()
         {
             InitializeComponent();
+            
             guna2ProgressBar1.Visible = true;
             guna2TextBox2.Visible = true;
             
@@ -56,11 +68,16 @@ namespace SoundCloudScraperV1._4
                 await downloader.Download(TxtURL.Text);
                 guna2ProgressBar1.Increment(100);
                 TimeSpan timespan = downloader.GetTimespan();
+                string addDownloader = "insert into downloader(link) values('" + TxtURL.Text + "');";
                 TxtURL.Text = "";
                 guna2TextBox2.Text += " ";
                 guna2TextBox2.Text += $@"{timespan.Minutes}:{timespan.Seconds}:{timespan.TotalMilliseconds}";
                 guna2TextBox2.Text += "\r\n Download complete";
-
+                MySqlCommand cmd = new MySqlCommand(addDownloader, GetCon());
+                
+                cmd.ExecuteNonQuery();
+                long id = cmd.LastInsertedId;
+                //MessageBox.Show(i.ToString());
                 /*
                 SongSerialization songXML = 
                 songXML.setname(track.Title);
@@ -73,6 +90,11 @@ namespace SoundCloudScraperV1._4
                 String xml = sww.ToString();
                 TextReader reader = new StringReader(xml);
                 var myObject = (SongSerialization)serializer.Deserialize(reader);*/
+
+                string addSong = "insert into songs(fullname, duration, downl_id) values('" + song.getSpecName() + "', '" + song.getDurationString() + "', '" + id + "');";
+                MySqlCommand cmdd = new MySqlCommand(addSong, GetCon());
+                cmdd.ExecuteNonQuery();
+
 
 
 
@@ -139,7 +161,7 @@ namespace SoundCloudScraperV1._4
                     //guna2TextBox2.Text = "";
                     var track = await soundcloud.Tracks.GetAsync(songStack.getLink(i));
                     Song song = new Song(track.Title, track.User.Username, track.Duration);
-                    pictureBox1.Load(track.ArtworkUrl.ToString());
+                    //pictureBox1.Load(track.ArtworkUrl.ToString());
 
 
                     Downloader downloader = new Downloader();
@@ -160,6 +182,12 @@ namespace SoundCloudScraperV1._4
             guna2TextBox2.Text += $@"{stopwatch.Elapsed.Minutes}:{stopwatch.Elapsed.Seconds}:{stopwatch.Elapsed.TotalMilliseconds}";
             guna2TextBox2.Text += $@" Downloaded {songStack.getSongCount()} songs";
             guna2ProgressBar1.Decrement(100);
+
+
+        }
+
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
 
         }
     }

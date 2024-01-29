@@ -30,13 +30,13 @@
         {
             this.bgWorkerGetSong = new System.ComponentModel.BackgroundWorker();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.TxtURL = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2ProgressBar1 = new Guna.UI2.WinForms.Guna2ProgressBar();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.Add_Button = new Guna.UI2.WinForms.Guna2Button();
             this.DownloadAll_Button = new Guna.UI2.WinForms.Guna2Button();
+            this.Add_Button = new Guna.UI2.WinForms.Guna2Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.guna2ProgressBar1 = new Guna.UI2.WinForms.Guna2ProgressBar();
+            this.guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.TxtURL = new Guna.UI2.WinForms.Guna2TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -64,41 +64,55 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Download";
             // 
-            // TxtURL
+            // DownloadAll_Button
             // 
-            this.TxtURL.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TxtURL.DefaultText = "";
-            this.TxtURL.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.TxtURL.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.TxtURL.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.TxtURL.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.TxtURL.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TxtURL.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TxtURL.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TxtURL.Location = new System.Drawing.Point(17, 26);
-            this.TxtURL.Name = "TxtURL";
-            this.TxtURL.PasswordChar = '\0';
-            this.TxtURL.PlaceholderText = "";
-            this.TxtURL.SelectedText = "";
-            this.TxtURL.Size = new System.Drawing.Size(734, 36);
-            this.TxtURL.TabIndex = 0;
-            this.TxtURL.TextChanged += new System.EventHandler(this.guna2TextBox1_TextChanged);
+            this.DownloadAll_Button.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.DownloadAll_Button.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.DownloadAll_Button.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.DownloadAll_Button.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.DownloadAll_Button.FillColor = System.Drawing.Color.Maroon;
+            this.DownloadAll_Button.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.DownloadAll_Button.ForeColor = System.Drawing.Color.White;
+            this.DownloadAll_Button.Location = new System.Drawing.Point(444, 106);
+            this.DownloadAll_Button.Name = "DownloadAll_Button";
+            this.DownloadAll_Button.Size = new System.Drawing.Size(142, 28);
+            this.DownloadAll_Button.TabIndex = 6;
+            this.DownloadAll_Button.Text = "Download All";
+            this.DownloadAll_Button.Click += new System.EventHandler(this.DownloadAll_Button_Click);
             // 
-            // guna2Button1
+            // Add_Button
             // 
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.Maroon;
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(609, 150);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(142, 28);
-            this.guna2Button1.TabIndex = 1;
-            this.guna2Button1.Text = "Download";
-            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.Add_Button.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.Add_Button.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.Add_Button.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.Add_Button.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.Add_Button.FillColor = System.Drawing.Color.Maroon;
+            this.Add_Button.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.Add_Button.ForeColor = System.Drawing.Color.White;
+            this.Add_Button.Location = new System.Drawing.Point(607, 106);
+            this.Add_Button.Name = "Add_Button";
+            this.Add_Button.Size = new System.Drawing.Size(142, 28);
+            this.Add_Button.TabIndex = 5;
+            this.Add_Button.Text = "Add";
+            this.Add_Button.Click += new System.EventHandler(this.Add_Button_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(17, 276);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(93, 85);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // guna2ProgressBar1
+            // 
+            this.guna2ProgressBar1.Location = new System.Drawing.Point(469, 363);
+            this.guna2ProgressBar1.Name = "guna2ProgressBar1";
+            this.guna2ProgressBar1.Size = new System.Drawing.Size(280, 22);
+            this.guna2ProgressBar1.TabIndex = 3;
+            this.guna2ProgressBar1.Text = "guna2ProgressBar1";
+            this.guna2ProgressBar1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.guna2ProgressBar1.ValueChanged += new System.EventHandler(this.guna2ProgressBar1_ValueChanged);
             // 
             // guna2TextBox2
             // 
@@ -123,55 +137,41 @@
             this.guna2TextBox2.TextOffset = new System.Drawing.Point(0, -50);
             this.guna2TextBox2.TextChanged += new System.EventHandler(this.guna2TextBox2_TextChanged);
             // 
-            // guna2ProgressBar1
+            // guna2Button1
             // 
-            this.guna2ProgressBar1.Location = new System.Drawing.Point(469, 363);
-            this.guna2ProgressBar1.Name = "guna2ProgressBar1";
-            this.guna2ProgressBar1.Size = new System.Drawing.Size(280, 22);
-            this.guna2ProgressBar1.TabIndex = 3;
-            this.guna2ProgressBar1.Text = "guna2ProgressBar1";
-            this.guna2ProgressBar1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ProgressBar1.ValueChanged += new System.EventHandler(this.guna2ProgressBar1_ValueChanged);
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.FillColor = System.Drawing.Color.Maroon;
+            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2Button1.ForeColor = System.Drawing.Color.White;
+            this.guna2Button1.Location = new System.Drawing.Point(609, 150);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(142, 28);
+            this.guna2Button1.TabIndex = 1;
+            this.guna2Button1.Text = "Download";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
-            // pictureBox1
+            // TxtURL
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(17, 276);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(93, 85);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
-            // Add_Button
-            // 
-            this.Add_Button.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.Add_Button.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.Add_Button.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.Add_Button.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.Add_Button.FillColor = System.Drawing.Color.Maroon;
-            this.Add_Button.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Add_Button.ForeColor = System.Drawing.Color.White;
-            this.Add_Button.Location = new System.Drawing.Point(607, 106);
-            this.Add_Button.Name = "Add_Button";
-            this.Add_Button.Size = new System.Drawing.Size(142, 28);
-            this.Add_Button.TabIndex = 5;
-            this.Add_Button.Text = "Add";
-            this.Add_Button.Click += new System.EventHandler(this.Add_Button_Click);
-            // 
-            // DownloadAll_Button
-            // 
-            this.DownloadAll_Button.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.DownloadAll_Button.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.DownloadAll_Button.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.DownloadAll_Button.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.DownloadAll_Button.FillColor = System.Drawing.Color.Maroon;
-            this.DownloadAll_Button.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.DownloadAll_Button.ForeColor = System.Drawing.Color.White;
-            this.DownloadAll_Button.Location = new System.Drawing.Point(444, 106);
-            this.DownloadAll_Button.Name = "DownloadAll_Button";
-            this.DownloadAll_Button.Size = new System.Drawing.Size(142, 28);
-            this.DownloadAll_Button.TabIndex = 6;
-            this.DownloadAll_Button.Text = "Download All";
-            this.DownloadAll_Button.Click += new System.EventHandler(this.DownloadAll_Button_Click);
+            this.TxtURL.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.TxtURL.DefaultText = "";
+            this.TxtURL.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.TxtURL.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.TxtURL.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.TxtURL.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.TxtURL.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.TxtURL.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TxtURL.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.TxtURL.Location = new System.Drawing.Point(17, 26);
+            this.TxtURL.Name = "TxtURL";
+            this.TxtURL.PasswordChar = '\0';
+            this.TxtURL.PlaceholderText = "";
+            this.TxtURL.SelectedText = "";
+            this.TxtURL.Size = new System.Drawing.Size(734, 36);
+            this.TxtURL.TabIndex = 0;
+            this.TxtURL.TextChanged += new System.EventHandler(this.guna2TextBox1_TextChanged);
             // 
             // tabControl1
             // 
@@ -192,6 +192,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SoundCloudScraper";
+            this.Load += new System.EventHandler(this.Form1_Load_1);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl1.ResumeLayout(false);

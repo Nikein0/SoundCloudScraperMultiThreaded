@@ -37,6 +37,11 @@ namespace SoundCloudScraper
 
         public void UpdateDwnlCount() { this.downloadcount = downloadcount + 1; }
 
+        public int GetDownlCount()
+        {
+            return this.downloadcount;
+        }
+
         /*public async Task Download(string SClink)   //@$"c:\Downloads\{trackname}.mp3"
         {
             var stopwatch = new Stopwatch();
@@ -96,6 +101,7 @@ namespace SoundCloudScraper
         public string getSongName() { return SongName; }
         public string getUserName() { return UserName; }
         public long? getDuration() { return Duration; }
+        public string getDurationString() { return DurationString; }
 
         public string DurationString
         {
