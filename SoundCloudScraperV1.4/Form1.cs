@@ -143,6 +143,8 @@ namespace SoundCloudScraperV1._4
             TxtURL.Text = "";
             guna2TextBox2.Text = $@"Added: {songStack.getLink(songStack.getSongCount())}";
             songStack.addSongCount();
+            label2.Visible = true;
+            label2.Text = $@"{songStack.getSongCount()}";
         }
 
         private void DownloadAll_Button_Click(object sender, EventArgs e)
@@ -190,5 +192,42 @@ namespace SoundCloudScraperV1._4
         {
 
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void guna2Button2_Click(object sender, EventArgs e)
+        {
+            List<string> links = new List<string>();
+            using (StreamReader sr = new StreamReader("bulk.txt"))
+            {
+                string line;
+                // Read the file line by line and extract links.
+                while ((line = sr.ReadLine()) != null)
+                {
+                        links.Add(line);
+                }
+            }
+            Downloader downloader = new Downloader(links);
+            List<string> lines = downloader.getLinks();
+
+                foreach (string link in links)
+                {
+                    var track = await soundcloud.Tracks.GetAsync(link);
+                    guna2ProgressBar1.Increment(20);
+                    Song song = new Song(track.Title, track.User.Username, track.Duration);
+                    pictureBox1.Load(track.ArtworkUrl.ToString());
+                    guna2TextBox2.Visible = true;
+                    guna2TextBox2.Text = $@"{song.getSpecName()}";
+                    guna2ProgressBar1.Increment(40);
+                    await downloader.Download(link);
+
+                    guna2TextBox2.Text += " ";
+                    guna2TextBox2.Text += "\r\n Download complete";
+                    guna2ProgressBar1.Increment(100);
+                }
+            }
+        }
     }
-}

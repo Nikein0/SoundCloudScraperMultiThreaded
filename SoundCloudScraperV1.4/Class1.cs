@@ -27,7 +27,21 @@ namespace SoundCloudScraper
         public TimeSpan timespan;
         private string specname = "";
         private int downloadcount = 0;
+        private string filePath = "bulk.txt";
+        private List<string> links;
         
+        public Downloader(List<string> links)
+        {
+            this.links = links;
+        }
+        public Downloader()
+        {
+
+        }
+        public List<string> getLinks()
+        {
+            return links;
+        }
         //string trackname;
         public void SetTimespan(TimeSpan timespan)
         {
@@ -69,6 +83,40 @@ namespace SoundCloudScraper
             stopwatch.Stop();
             SetTimespan(stopwatch.Elapsed);
 
+        }
+        
+        public List<string> ReadLinks()
+        {
+            
+            try
+            {
+                // Open the text file using a stream reader.
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    string line;
+                    // Read the file line by line and extract links.
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        // Check if the line contains a valid URL.
+                        if (IsValidUrl(line))
+                        {
+                            links.Add(line);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"An error occurred while reading the file: {e.Message}");
+            }
+
+            return links;
+        }
+        private bool IsValidUrl(string url)
+        {
+            // You can implement a more sophisticated URL validation here if needed.
+            // This is a simple check to see if the line starts with "http://" or "https://".
+            return url.StartsWith("http://") || url.StartsWith("https://");
         }
         public TimeSpan GetTimespan()
         {
