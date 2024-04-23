@@ -50,6 +50,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.tabPage1.Controls.Add(this.guna2Button2);
             this.tabPage1.Controls.Add(this.DownloadAll_Button);
             this.tabPage1.Controls.Add(this.Add_Button);
             this.tabPage1.Controls.Add(this.pictureBox1);
